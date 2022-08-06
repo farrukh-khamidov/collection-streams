@@ -1,10 +1,13 @@
 package liang.ex30_2;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class Exercise1 {
     public static void main(String[] args) {
         Character[] chars = {'D', 'B', 'A', 'C'};
+
+        Character c = Stream.of(chars).sorted().findFirst().orElse(null);
 
         System.out.println(Stream.of(chars).sorted().findFirst().get());
 

@@ -10,8 +10,10 @@ public class Example1 {
         Set<Double> set = new HashSet<>(Arrays.asList(numbers));
         int count = 0;
         for (double e: set)
-            if (e > 60)
+            if (e > 50)
                 count++;
         System.out.println("Count is " + count);
+
+
     }
 }
