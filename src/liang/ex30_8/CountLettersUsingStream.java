@@ -18,7 +18,9 @@ public class CountLettersUsingStream {
         });
 
         count = 0; // Reset the count for columns
+
         System.out.println("\nThe occurrences of each letter are:");
+
         Stream.of(chars).collect(Collectors.groupingBy(e -> e, TreeMap::new, Collectors.counting())).forEach((k, v) -> {
             System.out.print(v + " " + k + (++count % 10 == 0 ? "\n" : " "));
         });

@@ -10,5 +10,9 @@ public class Exercise4 {
         map.put("Peter", 1.1);
 
         System.out.println(map.values().stream().mapToDouble(Double::doubleValue).sum());
+
+
+
+
     }
 }

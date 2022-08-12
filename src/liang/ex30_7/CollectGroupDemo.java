@@ -8,8 +8,7 @@ import java.util.stream.Stream;
 
 public class CollectGroupDemo {
     public static void main(String[] args) {
-        String[] names = {"John", "Peter", "Susan", "Kim", "Jen",
-                "George", "Alan", "Stacy", "Steve", "john"};
+        String[] names = {"John", "Peter", "Susan", "susan", "Jen", "George", "jen", "john", "Steve", "john"};
 
         Map<String, Long> map1 = Stream.of(names).
                 map(e -> e.toUpperCase()).collect(
@@ -28,11 +27,25 @@ public class CollectGroupDemo {
                 forEach((k, v) -> System.out.println(k + " occurs " + v +
                         (v > 1 ? " times " : " time ")));
 
-        MyStudent[] students = {new MyStudent("John", "Lu", "CS", 32, 78),
+        TreeMap<Integer, Long> collect = IntStream.of(values).mapToObj(e -> e).collect(
+                Collectors.groupingBy(e -> e, TreeMap::new,
+                        Collectors.counting()));
+
+        System.out.println(collect);
+
+        collect.forEach((k, v) -> {
+            System.out.println(k + " occurs " + v + (v > 1 ? " times " : " time "));
+        });
+
+
+        MyStudent[] students = {
+                new MyStudent("John", "Lu", "CS", 32, 78),
                 new MyStudent("Susan", "Yao", "Math", 31, 85.4),
-                new MyStudent("Kim", "Johnson", "CS", 30, 78.1)};
+                new MyStudent("Kim", "Johnson", "CS", 30, 78.1)
+        };
 
         System.out.printf("%10s%10s\n", "Department", "Average");
+
         Stream.of(students).collect(Collectors.
                         groupingBy(MyStudent::getMajor, TreeMap::new,
                                 Collectors.averagingDouble(MyStudent::getScore))).
@@ -47,8 +60,7 @@ class MyStudent {
     private int age;
     private double score;
 
-    public MyStudent(String firstName, String lastName, String major,
-                     int age, double score) {
+    public MyStudent(String firstName, String lastName, String major, int age, double score) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.major = major;

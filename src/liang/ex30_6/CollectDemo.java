@@ -5,19 +5,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class CollectDemo {
     public static void main(String[] args) {
-        String[] names = {"John", "Peter", "Susan", "Kim", "Jen",
-                "George", "Alan", "Stacy", "Michelle", "john"};
+        String[] names = {"John", "Peter", "Susan", "Kim", "Jen", "George", "Alan", "Stacy", "Michelle", "john"};
+        StringBuilder collect = Stream.of(names).collect(StringBuilder::new,
+                StringBuilder::append, StringBuilder::append);
+        System.out.println(collect);
+
+
+
+        StringBuilder collect1 = Stream.of(names).parallel().collect(StringBuilder::new,
+                StringBuilder::append, StringBuilder::append);
+        System.out.println(collect1);
+
+
         System.out.println("The number of characters for all names: " +
                 Stream.of(names).collect(StringBuilder::new,
                         StringBuilder::append, StringBuilder::append).length());
 
         List<String> list = Stream.of(names).collect(ArrayList::new,
                 ArrayList::add, ArrayList::addAll);
+
+
         System.out.println(list);
+
         list = Stream.of(names).collect(Collectors.toList());
         System.out.println(list);
 
@@ -38,5 +52,14 @@ public class CollectDemo {
         System.out.println("Max is " + stats.getMax());
         System.out.println("Min is " + stats.getMin());
         System.out.println("Average is " + stats.getAverage());
+
+
+        IntStream intStream = Stream.of(names).mapToInt(String::length);
+
+        java.util.IntSummaryStatistics stats2 = intStream.summaryStatistics();
+
+        System.out.println("Max is " + stats2.getMax());
+        System.out.println("Min is " + stats2.getMin());
+        System.out.println("Average is " + stats2.getAverage());
     }
 }

@@ -10,10 +10,10 @@ public class IntStreamDemo {
 
         System.out.println("The average of distinct even numbers > 3: " +
                 IntStream.of(values).distinct()
-                        .filter(e -> e > 3 && e % 2 == 0).average().getAsDouble());
+                        .filter(e -> e > 3 && e % 2 == 0).average().getAsDouble()); // 4 20 6 10.0
 
         System.out.println("The sum of the first 4 numbers is " +
-                IntStream.of(values).limit(4).sum());
+                IntStream.of(values).limit(4).sum()); // 13
 
         IntSummaryStatistics stats =
                 IntStream.of(values).summaryStatistics();
@@ -29,6 +29,9 @@ public class IntStreamDemo {
 
         System.out.println("Total character count for all names is "
                 + Stream.of(names).mapToInt(e -> e.length()).sum());
+
+        Stream.of(names).mapToInt(e -> e.length()).forEach(value -> System.out.print(value + " "));
+        System.out.println();
 
         System.out.println("The number of digits in array values is " +
                         Stream.of(values).map(e -> e + "")

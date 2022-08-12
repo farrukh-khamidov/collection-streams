@@ -12,6 +12,7 @@ public class ParallelStreamDemo5 {
                 Runtime.getRuntime().availableProcessors());
 
         long startTime = System.currentTimeMillis();
+
         int[] list1 = random.ints(200_000_000).filter(e -> e > 0).sorted()
                 .limit(5).toArray();
         System.out.println(Arrays.toString(list1));

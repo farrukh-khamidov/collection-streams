@@ -17,6 +17,8 @@ public class ParallelStreamDemo2 {
 
         IntStream stream = IntStream.of(list).filter(e -> e > 0).sorted()
         .limit(5);
+
+
         System.out.println("The time for the preceding method is " +
                 (System.currentTimeMillis() - startTime) + " milliseconds");
 
